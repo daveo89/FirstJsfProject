@@ -9,32 +9,49 @@
 	<link href="./css/styles.css" rel="stylesheet" type="text/css" />
 </h:head>
 <h:body>
-		<h:form>
-			<p:growl showDetail="true" />
-			<p:tabView dynamic="true" onTabClose="10">
-				<p:ajax event="tabClose" onstart="confirmation.show()" />
-				
-				<p:tab id="tab1" title="Zakładka 1" closable="true">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="To jest pierwsza zakładka"/>
-					</h:panelGrid>
-				</p:tab>
-				
-				<p:tab id="tab2" title="Zakładka 2" closable="true">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="To jest druga zakładka"/>
-					</h:panelGrid>
-				</p:tab>
+		<h:form id="form">
+		<p:outputLabel for="ileZakladek" value="Podaj ile zakładek otworzyć? " style="font-weight:bold" />
+		<p:inputText id="ileZakladek" value="#{mojBean.ile}" />
+		<p:commandButton id="start" value="Generuj zakładki" update="tabView" />	
 			
-			</p:tabView>
+			<p:growl id="wiadomosc" showDetail="true" />
+			<p:panel id="tabView" header="Panel zakładek" >
+				<p:tabView value="#{mojBean.list}" var="listItem" widgetVar="zakladki" >
+					<p:tab title="#{listItem.id}" >
+						<h:outputText value="Jestem #{listItem.id} zakładką w kolejności. " />
+						<p:commandButton value="Zamknij zakładke" onclick="confirmation.show()"  />				
+					</p:tab>
+				</p:tabView>
+			</p:panel>
 			
-			<p:confirmDialog message="Czy na pewno zamknąć zakładkę?" 
+			<p:confirmDialog id="wyborButton" message=""  
 						header="Twój wybór" severit="alert" widgetVar="confirmation">
-						
-							<p:commandButton value="Tak" oncomplete="confirmation.hide()"/>
-							<p:commandButton value="Nie" onclick="confirmation.hide()" type="button"/>
+							
+							<p:commandButton value="Tak" oncomplete="confirmation.hide()"
+								onclick="zakladki.remove(zakladki.getActiveIndex())" />
+							<p:commandButton value="Nie" onclick="confirmation.hide()" />
 						
 			</p:confirmDialog>
+			
+<!-- 			<p:tabView id="tabView" widgetVar="zakladki" dynamic="true" > -->
+<!-- 				<p:ajax event="tabClose" onstart="confirmation.show()"  /> -->
+				
+<!-- 				<p:tab id="tab1" title="Zakładka 1" closable="false"> -->
+<!-- 					<h:panelGrid columns="2" cellpadding="10"> -->
+<!-- 						<h:outputText value="To jest pierwsza zakładka "/> -->
+<!-- 						<p:commandButton id="wybor1" value="Zamknij zakładke" onclick="confirmation.show()" /> -->
+<!-- 					</h:panelGrid> -->
+<!-- 				</p:tab> -->
+				
+<!-- 				<p:tab id="tab2" title="Zakładka 2" closable="false"> -->
+<!-- 					<h:panelGrid columns="2" cellpadding="10"> -->
+<!-- 						<h:outputText value="To jest druga zakładka"/> -->
+<!-- 						<p:commandButton id="wybor2" value="Zamknij zakładke" onclick="confirmation.show()" /> -->
+<!-- 					</h:panelGrid> -->
+<!-- 				</p:tab> -->
+			
+<!-- 			</p:tabView> -->
+			
 			
 			
 		</h:form>
