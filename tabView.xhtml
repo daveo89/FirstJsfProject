@@ -16,7 +16,8 @@
 			
 			<p:growl id="wiadomosc" showDetail="true" />
 			<p:panel id="tabView" header="Panel zakładek" >
-				<p:tabView value="#{mojBean.list}" var="listItem" widgetVar="zakladki" >
+				<p:tabView  value="#{mojBean.list}" var="listItem" widgetVar="zakladki" >
+					<p:ajax event="tabChange" listener="#{zakladka.onChange}" />
 					<p:tab title="#{listItem.id}" >
 						<h:outputText value="Jestem #{listItem.id} zakładką w kolejności. " />
 						<p:commandButton value="Zamknij zakładke" 
@@ -25,35 +26,14 @@
 				</p:tabView>
 			</p:panel>
 			
-			<p:confirmDialog id="wyborButton" message="#{zakladka.aktywnaZakladka} ?"  
+			<p:confirmDialog id="wyborButton" message="#{zakladka.aktualneId} ?"  
 						header="Twój wybór" severit="alert" widgetVar="confirmation">
 							
 							<p:commandButton value="Tak" oncomplete="confirmation.hide()"
 								onclick="zakladki.remove(zakladki.getActiveIndex())" />
 							<p:commandButton value="Nie" onclick="confirmation.hide()" />
 						
-			</p:confirmDialog>
-			
-<!-- 			<p:tabView id="tabView" widgetVar="zakladki" dynamic="true" > -->
-<!-- 				<p:ajax event="tabClose" onstart="confirmation.show()"  /> -->
-				
-<!-- 				<p:tab id="tab1" title="Zakładka 1" closable="false"> -->
-<!-- 					<h:panelGrid columns="2" cellpadding="10"> -->
-<!-- 						<h:outputText value="To jest pierwsza zakładka "/> -->
-<!-- 						<p:commandButton id="wybor1" value="Zamknij zakładke" onclick="confirmation.show()" /> -->
-<!-- 					</h:panelGrid> -->
-<!-- 				</p:tab> -->
-				
-<!-- 				<p:tab id="tab2" title="Zakładka 2" closable="false"> -->
-<!-- 					<h:panelGrid columns="2" cellpadding="10"> -->
-<!-- 						<h:outputText value="To jest druga zakładka"/> -->
-<!-- 						<p:commandButton id="wybor2" value="Zamknij zakładke" onclick="confirmation.show()" /> -->
-<!-- 					</h:panelGrid> -->
-<!-- 				</p:tab> -->
-			
-<!-- 			</p:tabView> -->
-			
-			
+			</p:confirmDialog>	
 			
 		</h:form>
 	
