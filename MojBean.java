@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class MojBean {
 
-  private String activeTab = "Test";
 	private String ile;
 	private List<Zakladka> list;
 	
@@ -16,14 +15,6 @@ public class MojBean {
 		list = new ArrayList<Zakladka>();
 	}
 	
-	public String getActiveTab() {
-		return activeTab;
-	}
-	
-	public void setActiveTab(String activeTab) {
-		this.activeTab = activeTab;
-	}
-
 	public String getIle() {
 		return ile;
 	}
