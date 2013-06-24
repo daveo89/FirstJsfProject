@@ -19,12 +19,13 @@
 				<p:tabView value="#{mojBean.list}" var="listItem" widgetVar="zakladki" >
 					<p:tab title="#{listItem.id}" >
 						<h:outputText value="Jestem #{listItem.id} zakładką w kolejności. " />
-						<p:commandButton value="Zamknij zakładke" onclick="confirmation.show()"  />				
+						<p:commandButton value="Zamknij zakładke" 
+							onclick="confirmation.show()"  />				
 					</p:tab>
 				</p:tabView>
 			</p:panel>
 			
-			<p:confirmDialog id="wyborButton" message=""  
+			<p:confirmDialog id="wyborButton" message="#{zakladka.aktywnaZakladka} ?"  
 						header="Twój wybór" severit="alert" widgetVar="confirmation">
 							
 							<p:commandButton value="Tak" oncomplete="confirmation.hide()"
